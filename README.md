@@ -1,27 +1,23 @@
-servedir
-========
+# servedir
 
-Install
--------
+## Install
 
 ```sh
+go get github.com/ngs/servedir
 go install -i github.com/ngs/servedir
 ```
 
-Usage
------
+## Usage
 
 ```sh
-servedir .
+servedir -port 8123 .
 ```
 
-Author
-------
+## Author
 
 [Atushi Nagase]
 
-License
--------
+## License
 
 Copyright &copy; 2018 [Atushi Nagase]. All rights reserved.
 
