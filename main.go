@@ -5,19 +5,25 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strconv"
 
 	apachelog "github.com/lestrrat-go/apache-logformat"
 )
 
 func main() {
-	dir := os.Args[1:]
-	if len(dir) != 1 {
+	portPtr := flag.Int("port", 8000, "HTTP Port to Listen")
+	flag.Parse()
+	if flag.NArg() > 1 {
 		fmt.Println("Usage: servedir /path/to/host")
 		os.Exit(1)
 	}
-	portPtr := flag.Int("port", 8000, "HTTP Port to Listen")
+	dir := "."
+	if flag.NArg() == 1 {
+		dir = flag.Args()[0]
+	}
+	dir, _ = filepath.Abs(dir)
 	addr := ":" + strconv.Itoa(*portPtr)
-	fmt.Printf("HTTP Server started on http://localhost%s\n", addr)
-	http.ListenAndServe(addr, apachelog.CombinedLog.Wrap(http.FileServer(http.Dir(dir[0])), os.Stderr))
+	fmt.Printf("Serving %v on http://localhost%v\n", dir, addr)
+	http.ListenAndServe(addr, apachelog.CombinedLog.Wrap(http.FileServer(http.Dir(dir)), os.Stderr))
 }
