@@ -4,7 +4,7 @@
 
 ```sh
 go get github.com/ngs/servedir
-go install -i github.com/ngs/servedir
+go install github.com/ngs/servedir
 ```
 
 ## Usage
