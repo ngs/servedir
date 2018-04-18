@@ -10,7 +10,7 @@ go install github.com/ngs/servedir
 ## Usage
 
 ```sh
-servedir -port 8123 .
+servedir -open -port 8123 .
 ```
 
 ## Author
