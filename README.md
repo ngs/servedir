@@ -3,8 +3,7 @@
 ## Install
 
 ```sh
-go get github.com/ngs/servedir
-go install github.com/ngs/servedir
+go install github.com/ngs/servedir@latest
 ```
 
 ## Usage
