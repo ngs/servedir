@@ -37,8 +37,11 @@ func main() {
 	if open {
 		go func() {
 			time.Sleep(time.Second)
-			exec.Command("/usr/bin/open", url).Run()
+			_ = exec.Command("/usr/bin/open", url).Run()
 		}()
 	}
-	http.ListenAndServe(addr, apachelog.CombinedLog.Wrap(http.FileServer(http.Dir(dir)), os.Stderr))
+	if err := http.ListenAndServe(addr, apachelog.CombinedLog.Wrap(http.FileServer(http.Dir(dir)), os.Stderr)); err != nil {
+		fmt.Fprintf(os.Stderr, "Error starting server: %v\n", err)
+		os.Exit(1)
+	}
 }
