@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(go:*)",
+      "Bash(test:*)",
+      "Bash(mkdir:*)",
+      "Bash(make test:*)",
+      "Bash(make:*)",
+      "WebFetch(domain:github.com)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
