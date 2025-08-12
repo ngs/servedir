@@ -28,7 +28,7 @@ clean: ## Remove build artifacts
 	rm -f coverage.out coverage.html
 	$(GO) clean
 
-run: ## Run the application (default port 8000)
+run: ## Run the application (any available port)
 	$(GO) run $(MAIN_PATH) .
 
 install: ## Install the binary to GOPATH/bin

@@ -64,9 +64,9 @@ func TestFlags(t *testing.T) {
 		wantErr  bool
 	}{
 		{
-			name:     "default port",
+			name:     "default port (any available)",
 			args:     []string{"servedir"},
-			wantPort: 8000,
+			wantPort: 0,
 			wantErr:  false,
 		},
 		{
@@ -89,7 +89,7 @@ func TestFlags(t *testing.T) {
 			flag.CommandLine = flag.NewFlagSet(os.Args[0], flag.ContinueOnError)
 			
 			var port int
-			flag.IntVar(&port, "port", 8000, "HTTP Port to Listen")
+			flag.IntVar(&port, "port", 0, "HTTP Port to Listen (0 for any available port)")
 			
 			os.Args = tt.args
 			err := flag.CommandLine.Parse(os.Args[1:])

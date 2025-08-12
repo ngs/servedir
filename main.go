@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net"
 	"net/http"
 	"os"
 	"os/exec"
@@ -17,7 +18,7 @@ import (
 func main() {
 	var port int
 	var open bool
-	flag.IntVar(&port, "port", 8000, "HTTP Port to Listen")
+	flag.IntVar(&port, "port", 0, "HTTP Port to Listen (0 for any available port)")
 	if runtime.GOOS == "darwin" {
 		flag.BoolVar(&open, "open", false, "Open browser on started")
 	}
@@ -32,7 +33,15 @@ func main() {
 	}
 	dir, _ = filepath.Abs(dir)
 	addr := ":" + strconv.Itoa(port)
-	url := "http://localhost" + addr
+	
+	listener, err := net.Listen("tcp", addr)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error creating listener: %v\n", err)
+		os.Exit(1)
+	}
+	actualPort := listener.Addr().(*net.TCPAddr).Port
+	url := "http://localhost:" + strconv.Itoa(actualPort)
+	
 	fmt.Printf("Serving %v on %v\n", dir, url)
 	if open {
 		go func() {
@@ -40,7 +49,7 @@ func main() {
 			_ = exec.Command("/usr/bin/open", url).Run()
 		}()
 	}
-	if err := http.ListenAndServe(addr, apachelog.CombinedLog.Wrap(http.FileServer(http.Dir(dir)), os.Stderr)); err != nil {
+	if err := http.Serve(listener, apachelog.CombinedLog.Wrap(http.FileServer(http.Dir(dir)), os.Stderr)); err != nil {
 		fmt.Fprintf(os.Stderr, "Error starting server: %v\n", err)
 		os.Exit(1)
 	}

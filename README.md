@@ -38,7 +38,7 @@ make build
 
 ### Basic Usage
 
-Serve current directory on default port (8000):
+Serve current directory on any available port:
 
 ```sh
 servedir
@@ -65,7 +65,7 @@ servedir -open -port 8123 .
 ### Command Line Options
 
 ```
--port int    HTTP Port to Listen (default 8000)
+-port int    HTTP Port to Listen (default 0, any available port)
 -open        Open browser on started (macOS only)
 ```
 
