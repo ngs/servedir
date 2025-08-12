@@ -11,7 +11,7 @@ A simple HTTP file server with Apache-style logging for serving static files fro
 - 🚀 Simple and lightweight HTTP file server
 - 📝 Apache Combined Log Format output
 - 🔧 Configurable port
-- 🖥️ Auto-open browser on macOS
+- 🖥️ Auto-open browser (cross-platform)
 - 📁 Serve any directory
 
 ## Installation
@@ -56,7 +56,7 @@ servedir /path/to/directory
 servedir -port 8080 .
 ```
 
-### Auto-open Browser (macOS only)
+### Auto-open Browser
 
 ```sh
 servedir -open -port 8123 .
@@ -66,7 +66,7 @@ servedir -open -port 8123 .
 
 ```
 -port int    HTTP Port to Listen (default 0, any available port)
--open        Open browser on started (macOS only)
+-open        Open browser on started
 ```
 
 ## Development

@@ -6,7 +6,10 @@
       "Bash(mkdir:*)",
       "Bash(make test:*)",
       "Bash(make:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(./servedir:*)",
+      "Bash(timeout:*)",
+      "Bash(true)"
     ],
     "deny": [],
     "ask": []
